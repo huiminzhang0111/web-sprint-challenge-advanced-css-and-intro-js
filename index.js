@@ -208,16 +208,17 @@ Practice accessing data above by console.log-ing following items:
 (no functions needed) */
 
 //(1) Name of the first artist (0th index) in the array
-
+console.log(artists[0]['name']);
 
 //(2) Bio of the third artist (2nd index) in the array 
-
+console.log(artists[2]['bio']);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 (no function needed) 
 There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
-
+artists[8]['name'] = 'Vincent Van Dough';
+console.log(artists[8]['name']);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀  
@@ -228,9 +229,11 @@ Use getArtistByIndex to do the following:
 
 Example, if getArtistByIndex is invoked with the artists array and the number 0, it will return `the artist at index 0 is Amedeo Modigliani` */
 
-function getArtistByIndex(/*Your Code Here*/) {
+function getArtistByIndex(artists, number){
+  let name = artists[number]['name'];
+  return(`the artist at index ${number} is ${name}`);
+  }
   /*Your Code Here*/
-}
 
 
 
@@ -243,11 +246,18 @@ Example born in 1901 and died in 1959 - included -- born in 1889 and died in 192
 If correct, the function should return ["Salvador Dali", "Frida Kahlo"]*/
 // Hint - Look up the .split() method
 
-function get20s(/*Your Code Here*/) {
+function get20s(these_artists) {
   /*Your Code Here*/
+  const new_artists = [];
+  for(let i = 0; i < these_artists.length; i++){
+    const born_year = parseInt(these_artists[i]['years'].split(' ')[0]);
+    const end_year = parseInt(these_artists[i]['years'].split(' ')[2]);
+    if(born_year >= 1900 && end_year <= 2000){
+      new_artists.push(these_artists[i]['name']);
+    }
+  }
+  return new_artists;
 }
-
-
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use removeArtist to do the following:
@@ -258,10 +268,11 @@ Use removeArtist to do the following:
 
 For example, if removeArtist is invoked with the artists array and the number 0, it will remove Amedeo Modigliani from our dataset and return the number 19. */
 
-function removeArtist(/*Your Code Here*/) {
+function removeArtist(these_artists, number) {
   /*Your Code Here*/
+  these_artists.splice(number, 1);
+  return these_artists.length;
 }
-
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use addArtist to do the following: 
@@ -279,8 +290,18 @@ Use addArtist to do the following:
 
 Example: addArtist(artists) should return the artists array with the above object added to the end of the array. */
 
-function addArtist(/*Your Code Here*/) {
+function addArtist(these_artists) {
   /*Your Code Here*/
+  const artist = {
+    "id": 20,
+    "name": "Huimin Zhang",
+    "years": "1993 - 2021",
+    "genre": "Web Design",
+    "nationality": "Chinese",
+    "bio": "Francisco José de Goya y Lucientes (; Spanish: [fɾanˈθisko xoˈse ðe ˈɣoʝa i luˈθjentes]; 30 March 1746 – 16 April 1828) was a Spanish romantic painter and printmaker. He is considered the most important Spanish artist of the late 18th and early 19th centuries and throughout his long career was a commentator and chronicler of his era. Immensely successful in his lifetime, Goya is often referred to as both the last of the Old Masters and the first of the moderns.  He was also one of the great contemporary portraitists.He was born to a modest family in 1746 in the village of Fuendetodos in Aragon. He studied painting from age 14 under José Luzán y Martinez and moved to Madrid to study with Anton Raphael Mengs. He married Josefa Bayeu in 1773; their life was characterised by an almost constant series of pregnancies and miscarriages, and only one child, a son, survived into adulthood. Goya became a court painter to the Spanish Crown in 1786 and this early portion of his career is marked by portraits of the Spanish aristocracy and royalty, and Rococo style tapestry cartoons designed for the royal palace.",
+  }
+  these_artists.push(artist);
+  return these_artists;
 }
 
 
@@ -292,8 +313,15 @@ Use lotsOfArt to do the following:
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ... "Albrecht Dürer"]*/
 
-function lotsOfArt(/*Your Code Here*/) {
+function lotsOfArt(these_artists) {
   /*Your Code Here*/
+  const paint_artists = [];
+  for(let i = 0; i < these_artists.length; i++){
+    if(these_artists[i]['paintings'] > 100){
+      paint_artists.push(these_artists[i]['name']);
+    }
+  }
+  return paint_artists;
 }
 
 
